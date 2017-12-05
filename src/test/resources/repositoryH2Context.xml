@@ -1,0 +1,71 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<context:component-scan base-package="ua.rd" />
+	
+	<bean	name="orderStateContext" class="ua.rd.domain.entities.order.state.OrderStateContext" scope="prototype">
+			<property name="state" ref="newState"/>
+			</bean>
+	
+	<bean 	name="newState" class="ua.rd.domain.entities.order.state.NewState"/>
+	<bean 	name="inProgressState" class="ua.rd.domain.entities.order.state.InProgressState"/>
+	<bean 	name="cancelState" class="ua.rd.domain.entities.order.state.CancelState"/>
+	<bean	name="doneState" class="ua.rd.domain.entities.order.state.DoneState"/>
+	
+<!-- 	<bean 	name="createPizzaBean" class="ua.rd.service.CreatePizzaService"/>	 -->
+	
+	<bean 	class="ua.rd.infrastructure.BenchMarkProxyBeanPostProcessor"/>
+	
+	<bean class="ua.rd.domain.entities.customer.Address" scope="prototype"/>
+	
+	<bean class="ua.rd.domain.entities.customer.Customer" scope="prototype"/>
+	
+     <bean	name="order" class="ua.rd.domain.entities.order.Order" scope="prototype">
+    		<property name="statusContext" ref="orderStateContext"/>
+    		</bean>   
+          			
+<!-- 	<bean 	name="orderService" -->
+<!-- 			class="ua.rd.service.SimpleOrderService" >	 -->
+<!-- 			<constructor-arg ref="pizzaRepository"/> -->
+<!-- 			<constructor-arg ref="orderRepository"/> -->
+<!-- 			<lookup-method name="createOrder" bean="order"/> -->
+<!-- 			</bean>   -->
+
+	<jdbc:embedded-database id="dataSource" type="H2">
+		<!-- <jdbc:script location="classpath:META-INF/sql/schema.sql"/> 
+			 <jdbc:script location="classpath:META-INF/sql/test-data.sql"/> -->
+	</jdbc:embedded-database>
+	
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="packagesToScan" value="ua.rd" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>

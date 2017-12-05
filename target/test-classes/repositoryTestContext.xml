@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	profile="dev" 
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	
+	<bean class="ua.rd.infrastructure.BenchMarkProxyBeanPostProcessor"/>
+
+<!-- 	<bean name="orderRepository" class="repository.order.InMemOrderRepository" /> -->
+
+<!-- 	<bean name="createPizzaBean" class="service.CreatePizzaService" /> -->
+
+<!-- 	<bean id="customer" class="domain.entities.customer.Customer"> -->
+<!-- 		<constructor-arg value="1" /> -->
+<!-- 		<constructor-arg value="VasjaRep" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean name="pizzaRepository" class="repository.pizza.InMemPizzaRepository" -->
+<!-- 		init-method="cookPizzas"> -->
+<!-- 		<property name="pizzas"> -->
+<!-- 			<list> -->
+<!-- 				<bean class="domain.entities.pizza.Pizza"> -->
+<!-- 					<constructor-arg index="0"> -->
+<!-- 						<null /> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="1"> -->
+<!-- 						<value>Margarita</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="2"> -->
+<!-- 						<value>2.8</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="3" value="VEGETERIAN" /> -->
+<!-- 				</bean> -->
+
+<!-- 				<bean class="domain.entities.pizza.Pizza"> -->
+<!-- 					<constructor-arg index="0"> -->
+<!-- 						<null /> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="1"> -->
+<!-- 						<value>Salchichona</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="2"> -->
+<!-- 						<value>2.3</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="3" value="MEAT" /> -->
+<!-- 				</bean> -->
+
+<!-- 				<bean class="domain.entities.pizza.Pizza"> -->
+<!-- 					<constructor-arg index="0"> -->
+<!-- 						<null /> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="1"> -->
+<!-- 						<value>MashroomLand</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="2"> -->
+<!-- 						<value>1.55</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="3" value="SEA" /> -->
+<!-- 				</bean> -->
+				
+				
+<!-- 				<bean class="domain.entities.pizza.Pizza"> -->
+<!-- 					<constructor-arg index="0"> -->
+<!-- 						<null /> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="1"> -->
+<!-- 						<value>Princhipessa</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="2"> -->
+<!-- 						<value>5.68</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="3" value="MEAT" /> -->
+<!-- 				</bean> -->
+				
+<!-- 				<bean class="domain.entities.pizza.Pizza"> -->
+<!-- 					<constructor-arg index="0"> -->
+<!-- 						<null /> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="1"> -->
+<!-- 						<value>Tomata</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="2"> -->
+<!-- 						<value>5.68</value> -->
+<!-- 					</constructor-arg> -->
+<!-- 					<constructor-arg index="3" value="VEGETERIAN" /> -->
+<!-- 				</bean> -->
+				
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+</beans>
+		

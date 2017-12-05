@@ -1,0 +1,63 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+    <context:component-scan base-package="ua.rd.service" />
+    
+	<bean	name="orderStateContext" scope="prototype" 
+			class="ua.rd.domain.entities.order.state.OrderStateContext" >
+			<property name="state" ref="newState"/>
+			</bean>
+	
+	<bean 	name="newState" class="ua.rd.domain.entities.order.state.NewState"/>
+	<bean 	name="inProgressState" class="ua.rd.domain.entities.order.state.InProgressState"/>
+	<bean 	name="cancelState" class="ua.rd.domain.entities.order.state.CancelState"/>
+	<bean	name="doneState" class="ua.rd.domain.entities.order.state.DoneState"/>
+	
+	<bean 	class="ua.rd.infrastructure.BenchMarkProxyBeanPostProcessor"/>
+	
+    <bean	name="order" scope="prototype"
+    		class="ua.rd.domain.entities.order.Order" >
+    		<property name="statusContext" ref="orderStateContext"/>
+    		</bean>   
+          			
+<!-- 	<bean 	name="orderService" -->
+<!-- 			class="ua.rd.service.impl.SimpleOrderService" >	 -->
+<!-- 			<constructor-arg ref="pizzaRepository"/> -->
+<!-- 			<constructor-arg ref="orderRepository"/> -->
+<!-- 			<lookup-method name="createOrder" bean="order"/> -->
+<!-- 			</bean> -->
+					
+	<bean 	name="accumulativeCard" scope="prototype"
+			class="ua.rd.domain.entities.customer.AccumulativeCard">
+			<constructor-arg value="0.0"/>
+			</bean>
+			
+	<bean 	name="createPizzaBean" class="ua.rd.service.impl.CreatePizzaService"/>	
+	  		
+	<bean   factory-bean="createPizzaBean"
+      		factory-method="createPizza">	
+      		<constructor-arg index="0"><null/></constructor-arg>
+      		<constructor-arg index="1"><value>Some name</value></constructor-arg>
+      		<constructor-arg index="2"><value>2.4</value></constructor-arg>
+      		<constructor-arg index="3" value="SEA"/>
+      		</bean>		
+      		
+    <bean 	id="customer" scope="prototype"
+			class="ua.rd.domain.entities.customer.Customer">
+			</bean>
+			
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
+		
